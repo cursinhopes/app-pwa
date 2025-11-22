@@ -22,19 +22,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ---- COMPILAR SASS ----
-      - name: Install Dart Sass
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y dart-sass
+      # ---- Instalar Sass (via npm) ----
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
+      - name: Install Sass compiler
+        run: npm install -g sass
+
+      # ---- Compilar Sass ----
       - name: Compile SASS to public/assets/css/main.css
         run: |
           mkdir -p public/assets/css
           sass sass/main.scss public/assets/css/main.css --style=compressed --no-source-map
 
-      # ------------------------
-
+      # ---- Publicar a pasta public/ ----
       - name: Upload website artifact
         uses: actions/upload-pages-artifact@v3
         with:
