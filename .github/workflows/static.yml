@@ -35,7 +35,7 @@ jobs:
       - name: Compile SASS to public/assets/css/main.css
         run: |
           mkdir -p public/assets/css
-          sass sass/main.scss public/assets/css/main.css --style=compressed --no-source-map
+          sass scss/main.scss public/assets/css/main.css --style=compressed --no-source-map
 
       # ---- Publicar a pasta public/ ----
       - name: Upload website artifact
