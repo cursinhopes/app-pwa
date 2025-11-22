@@ -1,5 +1,9 @@
 @use '../abstracts/index' as *;
 
+body { font-family: sans-serif; text-align: center; padding: 20px; }
+#reader { width: 100%; max-width: 500px; margin: 0 auto; }
+button { padding: 10px 20px; font-size: 16px; margin-top: 10px; }
+
 html {
   height: 100%;
 }

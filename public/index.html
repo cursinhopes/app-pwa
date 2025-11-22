@@ -15,8 +15,10 @@
     <meta name="publisher" content="Roger Eliodoro Condras">
     <meta name="rating" content="general">
     <!-- Icone guia navegador -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+    <link rel="icon" type="image/png" href="/assets/icons/icon-192.png">
     <!-- Folhas de estilo CSS -->
+    <link rel="manifest" href="manifest.json">
     <link rel="preload" href="/assets/font/MaterialSymbolsOutlined.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/font/bootstrap-icons.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/font/Merriweather.woff2" as="font" type="font/woff2" crossorigin>
@@ -24,6 +26,11 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="preload" href="/assets/css/main.css" as="style">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <script src="/assets/js/libs/bootstrap.bundle.min.js" defer></script>
+    <script src="/assets/js/libs/jquery.min.js" defer></script>
+    <script src="/assets/js/libs/jquery.mobile.custom.min.js" defer></script>
+    <script src="/assets/js/libs/html5-qrcode.min.js" defer></script>
+    <script src="/assets/js/default.js" defer></script>
   </head>
     
   <body>
@@ -47,6 +54,7 @@
 
     <main class="page-content">
       <h1>TESTE APP PWA</h1>
+      <div id="reader"></div>
     </main>
 
     <footer class="footer container-fluid">
@@ -101,9 +109,5 @@
         </div>
       </div>
     </footer> 
-    <script src="/assets/js/libs/bootstrap.bundle.min.js" defer></script>
-    <script src="/assets/js/libs/jquery.min.js" defer></script>
-    <script src="/assets/js/libs/jquery.mobile.custom.min.js" defer></script>
-    <script src="/assets/js/default.js" defer></script>
   </body>
 </html>
