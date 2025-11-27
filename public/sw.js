@@ -1,7 +1,7 @@
-const CACHE_NAME = 'cursinho-pes-v2';
+const CACHE_NAME = 'cursinho-pes-v1';
 
 const ASSETS_TO_CACHE = [
-  /*'./',
+  './',
   './index.html',
   './manifest.json',
   './assets/icons/icon-192.png',
@@ -21,7 +21,7 @@ const ASSETS_TO_CACHE = [
   './assets/js/libs/jquery.validate.min.js',
   './assets/js/libs/jquery.maskedinput.min.js',
   './assets/js/libs/html5-qrcode.min.js',
-  './assets/js/main.js'*/
+  './assets/js/main.js'
 ];
 
 self.addEventListener('install', (event) => {
