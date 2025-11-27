@@ -1,9 +1,15 @@
 const SPLASH_MIN_TIME = 2000;
+const API_URL = 'https://pes.ufsc.br/app/review-classes/presence';
 
 // Variáveis globais de controle do scanner
 let html5QrCode;
 let currentFacingMode = "environment"; // Começa com a câmera traseira
 let isScanning = false;
+let currentTypeScan;
+let btnEntrada;
+let btnSaida;
+let resultEl;
+let loadingEl;
 
 const minTimePromise = new Promise(resolve => {
     setTimeout(resolve, SPLASH_MIN_TIME);
@@ -59,7 +65,8 @@ function setupScannerUI() {
     html5QrCode = new Html5Qrcode("reader");
 
     // Botão na Home para abrir o scanner
-    $('#btn-start-scan').click(function() {
+    $('.btn-start-scan').click(function() {
+        currentTypeScan = $(this).val();
         openScanner();
     });
 
@@ -151,6 +158,93 @@ function onScanSuccess(decodedText, decodedResult) {
     }, 300);
 }
 
+function enviarDadosParaServidor(code, tipo) {
+                
+    const dataLocalMySQL = new Date().toLocaleString('sv-SE');
+
+    const payload = {
+        code: code,
+        type: tipo,
+        datetime: dataLocalMySQL // Ex: "2025-11-06 16:53:00"
+    };
+
+    fetch(API_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        // Checa se a resposta foi um sucesso (status 2xx)
+        if (!response.ok) {
+            // Tenta ler a mensagem de erro do servidor, se houver
+            return response.text().then(text => {
+                throw new Error(`Erro ${response.status}: ` + (text || response.statusText));
+            });
+        }
+        // Tenta parsear o JSON
+        return response.json();
+    })
+    .then(data => {
+        // Servidor respondeu com JSON, processamos a resposta
+        processarRespostaServidor(data);
+    })
+    .catch(err => {
+        // Captura erros de rede (ex: DNS, sem conexão) ou o erro jogado acima
+        console.error("Erro no fetch:", err);
+        // O 'TypeError: Failed to fetch' é o erro clássico de CORS
+        if (err.message.includes('Failed to fetch')) {
+            exibirMensagem("Erro de CORS ou rede. Verifique o servidor.", true);
+        } else {
+            exibirMensagem(err.message, true);
+        }
+    })
+    .finally(() => {
+        // Este bloco SEMPRE executa
+        loadingEl.style.display = 'none';
+        toggleBotoes(true); // Reabilita os botões
+    });
+}
+
+function processarRespostaServidor(data) {
+    if (data.error) {
+        let msg = data.message || "Erro ao cadastrar.";
+        exibirMensagem(msg, true);
+    } else {
+
+        const dataServidor = new Date(data.datetime.replace(' ', 'T'));
+        
+        // Verifica se a data é válida antes de formatar
+        let dataFormatada;
+        if (isNaN(dataServidor.getTime())) {
+            dataFormatada = data.datetime; // Fallback se a data não puder ser lida
+        } else {
+            dataFormatada = dataServidor.toLocaleString('pt-BR');
+        }
+        
+        const msg = `Aluno ${data.name}, ${data.type} às ${dataFormatada}.`;
+        exibirMensagem(msg, false, true); // true = Mensagem de sucesso (verde)
+    }
+}
+
+function toggleBotoes(habilitar) {
+    btnEntrada.disabled = !habilitar;
+    btnSaida.disabled = !habilitar;
+}
+
+function exibirMensagem(msg, isError, isSuccess = false) {
+    resultEl.textContent = msg;
+    resultEl.className = ''; // Limpa classes
+    
+    if (isError) {
+        resultEl.classList.add('error-message');
+    } else if (isSuccess) {
+        resultEl.classList.add('success-message');
+    }
+}
+
 function onScanFailure(error) {
     // Console limpo, ignorando erros de frames sem QR Code
 }
@@ -160,11 +254,15 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    //$('#btn-install').show();
 });
 
 
 $(function() {
+    btnEntrada = document.getElementById('btnEntrada');
+    btnSaida = document.getElementById('btnSaida');
+    resultEl = document.getElementById('result');
+    loadingEl = document.getElementById('loading');
+
     if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
                 .then(() => console.log("Service Worker Registrado"))

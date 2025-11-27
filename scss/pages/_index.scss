@@ -18,3 +18,88 @@
 .bg-black {
     background-color: #000;
 }
+
+h1 {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        /* Container para os botões */
+        .btn-container {
+            width: 80%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px; /* Espaço entre os botões */
+            margin-top: 20px;
+        }
+
+        /* Estilo base dos botões */
+        button {
+            padding: 20px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para desabilitado */
+        button:disabled {
+            background-color: #bdc3c7; /* Cinza */
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        button:not(:disabled):active {
+            transform: translateY(2px); /* Efeito de clique */
+        }
+
+        /* Elemento de resultado e feedback */
+        #result {
+            font-size: 16px;
+            word-wrap: break-word;
+            padding: 15px 20px;
+            margin-top: 30px;
+            color: #333;
+            background-color: #fff;
+            border-radius: 8px;
+            min-height: 2.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Estilos para feedback de sucesso e erro */
+        .success-message {
+            color: #27ae60 !important; /* Verde */
+            font-weight: 600;
+        }
+        .error-message {
+            color: #c0392b !important; /* Vermelho */
+            font-weight: 600;
+        }
+
+        /* Indicador de carregamento (spinner) */
+        #loading {
+            display: none; /* Começa escondido */
+            width: 30px;
+            height: 30px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
