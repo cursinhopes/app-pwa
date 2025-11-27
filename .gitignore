@@ -1,4 +1,7 @@
-public/assets/css/main.css
+public/assets/css/*
+!public/assets/css/libs/
+public/assets/js/*
+!public/assets/js/libs/
 *.css.map
 .deploy/
 .github/.cache/

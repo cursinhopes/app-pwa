@@ -2,19 +2,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR" id="html">
   <head>
-    <title>APP Cursinho PES</title>
+    <title>Cursinho PES</title>
     <meta name="keywords" content="Cursinho PES; UFSC; Curso pré-vestibular; Projeto Educação Solidária; Araranguá">
-    <meta name="description" content="APP do Cursinho PES.">
+    <meta name="description" content="Aplicativo do Cursinho PES.">
     <meta name="robots" content="index, follow">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#681323">
     <meta name="copyright" content="2025 Cursinho PES ©">
     <meta name="author" content="Roger Eliodoro Condras">
     <meta name="creator" content="Roger Eliodoro Condras">
     <meta name="publisher" content="Roger Eliodoro Condras">
     <meta name="rating" content="general">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Icone guia navegador -->
+    <meta name="theme-color" content="#681323">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
     <link rel="icon" type="image/png" href="/assets/icons/icon-192.png">
     <!-- Folhas de estilo CSS -->
@@ -30,84 +32,73 @@
     <script src="/assets/js/libs/jquery.min.js" defer></script>
     <script src="/assets/js/libs/jquery.mobile.custom.min.js" defer></script>
     <script src="/assets/js/libs/html5-qrcode.min.js" defer></script>
-    <script src="/assets/js/default.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
   </head>
-    
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary-color-pes">
-        <div class="container-fluid">
-          <a href="/"><img src="/assets/img/logo-header.webp" width="60" height="40" alt="Projeto Educação Solidária - Cursinho PES"></a><a class="navbar-brand p-0 me-auto lh-1" href="/"><b class="ps-2 font-pes fs-3">Cursinho PES</b></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-options" aria-controls="navbar-options" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbar-options">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a href="/login" class="btn btn-secondary-pes ms-0 ms-lg-3" role="button"><b>Login </b><span class="material-icons-outlined">login</span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <main class="page-content">
-      <h1>TESTE APP PWA</h1>
-      <div id="reader"></div>
-    </main>
-
-    <footer class="footer container-fluid">
-      <div class="row d-flex justify-content-center">
-        <div class="col-auto footer-col-left px-0">
-          <p class="mt-2 mb-0 fs-4">
-            <b>2025 Cursinho PES ©</b>
-          </p>
-          <div class="row flex-nowrap justify-content-center">
-            <div class="col-auto ps-0 pe-2 align-content-center">
-              <a href="https://maps.app.goo.gl/tfHC7z39v3RC2Qq79" target="_blank" class="text-white">
-                <span class="material-symbols-outlined fs-1">location_on</span>
-              </a>
-            </div>
-            <div class="col-auto px-0 text-start fs-footer">
-              <a href="https://maps.app.goo.gl/tfHC7z39v3RC2Qq79" target="_blank" class="text-white">
-                <p class="mt-2 mb-0">Rod. Gov. Jorge Lacerda, n. 3201, Sala 325 - Bloco A</p>
-                <p class="mt-0 mb-2">Jardim das Avenidas, Araranguá-SC. CEP: 88906-072</p>
-              </a>
-            </div>
-          </div>
-          <p class="fs-footer">
-            <b>CNPJ:</b> 53.290.429/0001-27 &nbsp; <b>DUNS Number:</b> 76-167-6284</span>
-          </p>
-        </div>
-        <div class="col-auto footer-col-right px-0 mx-0 mx-lg-5">
-          <p class="mt-2 mb-0 fs-4">
-            <b>Redes sociais e contato:</b>
-          </p>
-          <p class="mt-2 mb-2 icon-links">
-            <a href="https://www.instagram.com/cursinhopes" target="_blank">
-              <i class="bi bi-instagram fs-2 me-3" role="img" aria-label="Instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/cursinhopes" target="_blank">
-              <i class="bi bi-facebook fs-2 me-3" role="img" aria-label="Facebook"></i>
-            </a>
-            <a href="https://www.linkedin.com/company/cursinhopes" target="_blank">
-              <i class="bi bi-linkedin fs-2 me-3" role="img" aria-label="LinkedIn"></i>
-            </a>
-            <a href="https://www.youtube.com/CursinhoPES" target="_blank">
-              <i class="bi bi-youtube fs-2 me-3" role="img" aria-label="YouTube"></i>
-            </a>
-            <a href="https://pes.ufsc.br/contato">
-              <i class="bi bi-envelope-at fs-2" role="img" aria-label="E-mail de contato"></i>
-            </a>
-          </p>
-          <p class="fs-5 mb-4 mb-sm-3">
-            <a href="mailto:contato@pes.ufsc.br" target="_blank" class="text-white">
-              <span class="material-symbols-outlined">mail</span> contato@pes.ufsc.br
-            </a>
-          </p>
+    <div id="splash-screen" class="h-100 bg-drawn d-flex flex-column justify-content-center align-items-center">
+      <img src="/assets/img/logo-pes-circular.png" alt="Logo PES" width="60%">
+    </div>
+    <div id="install-screen" class="d-none h-100 bg-drawn d-flex flex-column justify-content-center align-items-center">
+      <div class="px-4">
+        <div class="card w-100">
+        <div class="card-body text-center">
+          <img src="/assets/img/logo-pes-circular.png" alt="Logo PES" class="w-75">
+          <h1 class="fw-bold"><span class="material-symbols-outlined">warning</span> AVISO <span class="material-symbols-outlined">warning</span></h1>
+          <p class="my-3">Para uma melhor experiência de uso, você deve realizar a instalação do aplicativo no seu dispositivo.</p>
+          <button class="btn btn-secondary-pes my-3" id="btn-install-app"><span class="material-symbols-outlined">apk_install</span> Instale o aplicativo</button>
+          <p id="ios-install-instructions" class="d-none">Toque no botão <strong>Compartilhar</strong> <span class="material-symbols-outlined">ios_share</span> e depois em <strong>Adicionar à Tela de Início</strong></p>
         </div>
       </div>
-    </footer> 
+      </div>
+    </div>
+    <div id="login-screen" class="d-none h-100 bg-drawn d-flex flex-column justify-content-center align-items-center px-4">
+      <div class="card maxw-900">
+        <div class="card-body">
+          <div class="row row-cols-1 row-cols-sm-2 align-items-stretch g-0">
+            <div class="col d-flex justify-content-center align-items-center">
+              <img src="/assets/img/logo-pes-circular.png" alt="Logo PES" class="w-75"> 
+            </div>
+            <div class="col d-flex align-items-center">
+              <form action="" class="w-100">
+                <h4 class="card-title mb-2 w-100 text-center">Seja bem-vindo!</h4>
+                <h6 class="card-subtitle mb-3 text-muted w-100 text-center">Realize o login para continuar</h6>
+                <div class="row mb-3">
+                  <div class="col-12">
+                    <label for="user"><b>Usuário:</b></label>
+                    <input type="text" class="form-control" name="user" id="user" placeholder="CPF, e-mail ou matrícula PES" required>
+                    <label for="user" class="invalid-feedback">Usuário não encontrado!</label>
+                  </div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col-12">
+                    <label for="password"><b>Senha:</b></label>
+                    <div class="input-group">
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Sua senha" required>
+                      <button class="input-group-text" id="btn-password-visibility" aria-label="Mostrar senha" title="Mostrar senha"><span class="material-symbols-outlined" role="img" aria-hidden="true">visibility</span></button>
+                      <label for="password" class="invalid-feedback">Senha incorreta!</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col text-end">
+                    <a href="https://pes.ufsc.br/recuperar-senha" target="_blank"><small>Esqueceu a senha ou primeiro acesso?</small></a>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="col-auto">
+                    <button class="btn btn-secondary-pes w-100" id="btn-submit"><b>Entrar</b> <span class="material-symbols-outlined">login</span></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main id="app" class="d-none">
+      <section id="scan-screen">
+        <div id="reader"></div>
+      </section>
+    </main>
   </body>
 </html>

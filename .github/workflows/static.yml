@@ -22,20 +22,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ---- Instalar Sass (via npm) ----
+      # ---- Configurar Node.js ----
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install Sass compiler
-        run: npm install -g sass
+      # ---- Instalar Dependências (Sass e Esbuild) ----
+      # Instalamos globalmente para que os comandos 'sass' e 'esbuild'
+      # fiquem disponíveis no terminal, assim como no seu script local.
+      - name: Install Compilers
+        run: npm install -g sass esbuild
 
-      # ---- Compilar Sass ----
-      - name: Compile SASS to public/assets/css/main.css
+      # ---- Executar o seu script de build ----
+      # 1. Damos permissão de execução ao script
+      # 2. Executamos ele para processar JS e CSS
+      - name: Run Build Script
         run: |
-          mkdir -p public/assets/css
-          sass scss/main.scss public/assets/css/main.css --style=compressed --no-source-map
+          chmod +x build.sh
+          ./build.sh
 
       # ---- Publicar a pasta public/ ----
       - name: Upload website artifact
