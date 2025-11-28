@@ -85,6 +85,8 @@ function openScanner() {
     // Troca visibilidade das telas
     $('#home-screen').addClass('d-none');
     $('#scan-screen').removeClass('d-none');
+
+    $('#reader').addClass('camera-active-container');
     
     startCamera(currentFacingMode);
 }
@@ -92,8 +94,16 @@ function openScanner() {
 function startCamera(facingMode) {
     const config = { 
         fps: 10, 
-        qrbox: { width: 250, height: 250 },
-        aspectRatio: 1.0 
+        // No iOS, se a qrbox for maior que o vídeo renderizado, falha.
+        // Usar uma função ajuda a garantir responsividade.
+        qrbox: (viewfinderWidth, viewfinderHeight) => {
+            return { width: 250, height: 250 };
+        },
+        // REMOVA O ASPECT RATIO
+        // aspectRatio: 1.0, 
+        
+        // OTIMIZAÇÃO: Tenta ler apenas QR Codes (ignora código de barras)
+        formatsToSupport: [ Html5QrcodeSupportedFormats.QR_CODE ]
     };
 
     // Inicia a câmera
@@ -285,26 +295,4 @@ $(function() {
             });
         }
     });
-
-        // 2. Configuração do Scanner
-        function onScanSuccess(decodedText, decodedResult) {
-            // Toca um alerta com o valor lido
-            alert("LIDO: " + decodedText);
-            
-            // Opcional: Parar a câmera após ler
-            // html5QrcodeScanner.clear(); 
-        }
-
-        function onScanFailure(error) {
-            // Ignora erros contínuos de "QR não detectado neste frame" para não poluir o console
-            // console.warn(`Erro de leitura = ${error}`);
-        }
-
-        // Inicia o scanner com interface padrão
-        let html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader", 
-            { fps: 10, qrbox: {width: 250, height: 250} },
-            /* verbose= */ false);
-            
-        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
 });
