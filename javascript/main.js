@@ -152,10 +152,11 @@ function onScanSuccess(decodedText, decodedResult) {
     stopScanner();
 
     // Executa a lógica de sucesso (Alert temporário)
-    setTimeout(() => {
+    /*setTimeout(() => {
         alert("LIDO COM SUCESSO: " + decodedText);
         // Aqui virá seu fetch POST futuramente
-    }, 300);
+    }, 300);*/
+    enviarDadosParaServidor(decodedText, currentTypeScan);
 }
 
 function enviarDadosParaServidor(code, tipo) {
