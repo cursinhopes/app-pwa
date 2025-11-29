@@ -92,34 +92,52 @@ function openScanner() {
 }
 
 function startCamera(facingMode) {
+    
+    // Configurações da biblioteca
     const config = { 
         fps: 10, 
-        // No iOS, se a qrbox for maior que o vídeo renderizado, falha.
-        // Usar uma função ajuda a garantir responsividade.
+        // Se quiser a caixa de volta, use função percentual, é mais seguro no iOS:
         qrbox: (viewfinderWidth, viewfinderHeight) => {
-            return { width: 250, height: 250 };
+            // 70% da largura menor
+            let minEdgePercentage = 0.70; 
+            let minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
+            let qrboxSize = Math.floor(minEdgeSize * minEdgePercentage);
+            return {
+                width: qrboxSize,
+                height: qrboxSize
+            };
         },
-        // REMOVA O ASPECT RATIO
-        // aspectRatio: 1.0, 
-        
-        // OTIMIZAÇÃO: Tenta ler apenas QR Codes (ignora código de barras)
         formatsToSupport: [ Html5QrcodeSupportedFormats.QR_CODE ]
     };
 
-    // Inicia a câmera
+    // Configurações de Hardware (Câmera)
+    // Isso é CRUCIAL para o iOS focar corretamente e não usar a lente errada
+    const cameraConstraints = {
+        facingMode: facingMode,
+        width: { min: 640, ideal: 1280, max: 1920 },
+        height: { min: 480, ideal: 720, max: 1080 },
+        focusMode: "continuous" // Tenta forçar foco contínuo (suporte varia)
+    };
+
+    // Inicia a câmera passando o objeto de constraints completo
     html5QrCode.start(
-        { facingMode: facingMode }, 
+        cameraConstraints, // <-- Mudamos aqui: passamos o objeto completo, não só facingMode
         config, 
         onScanSuccess, 
         onScanFailure
     ).then(() => {
         isScanning = true;
-        // Ajusta texto/icone do botão de troca se necessário
-        console.log(`Câmera iniciada em modo: ${facingMode}`);
+        console.log(`Câmera iniciada. Constraints:`, cameraConstraints);
     }).catch(err => {
         console.error("Erro ao iniciar câmera", err);
-        alert("Erro ao acessar a câmera. Verifique as permissões.");
-        stopScanner(); // Volta para home em caso de erro
+        // Fallback: se falhar com constraints específicas, tenta só o básico
+        if (typeof cameraConstraints === 'object') {
+             console.log("Tentando fallback sem constraints de resolução...");
+             html5QrCode.start({ facingMode: facingMode }, config, onScanSuccess, onScanFailure);
+        } else {
+             alert("Erro crítico na câmera: " + err);
+             stopScanner();
+        }
     });
 }
 
