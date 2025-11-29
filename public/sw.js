@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cursinho-pes-v5';
+const CACHE_NAME = 'cursinho-pes-v6';
 
 const ASSETS_TO_CACHE = [
   './',
