@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/web-BY3ZXy4Z.js","assets/dist-CgbWuuq4.js"])))=>i.map(i=>d[i]);
+import{C as e}from"./ionic-BJCPpJVZ.js";import{n as t}from"./dist-CgbWuuq4.js";var n=t(`Preferences`,{web:()=>e(()=>import(`./web-BY3ZXy4Z.js`).then(e=>new e.PreferencesWeb),__vite__mapDeps([0,1]))}),r=async(e,t)=>{await n.set({key:e,value:t})},i=async e=>{let{value:t}=await n.get({key:e});return t},a=async e=>{await n.remove({key:e})};export{a as n,r,i as t};

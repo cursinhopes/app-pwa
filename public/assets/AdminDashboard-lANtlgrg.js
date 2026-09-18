@@ -1,0 +1,1 @@
+import"./rolldown-runtime-hePW80VL.js";import{E as e,l as t,w as n,y as r}from"./ionic-BJCPpJVZ.js";e();var i=n(),a=()=>(0,i.jsx)(t,{className:`ion-padding`,children:(0,i.jsx)(r,{children:(0,i.jsx)(`h2`,{children:`Dashboard do administrador`})})});export{a as default};
